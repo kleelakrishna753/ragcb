@@ -13,6 +13,33 @@ from langchain.chains import ConversationalRetrievalChain
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 
+import os
+import requests
+from tqdm import tqdm
+
+MODEL_URL = "https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.1-GGUF/resolve/main/mistral-7b-instruct-v0.1.Q5_0.gguf"
+MODEL_PATH = "models/mistral-7b-instruct-v0.1.Q5_0.gguf"
+
+def download_model():
+    os.makedirs("models", exist_ok=True)
+    if not os.path.exists(MODEL_PATH):
+        print("Downloading model...")
+        response = requests.get(MODEL_URL, stream=True)
+        total = int(response.headers.get('content-length', 0))
+        with open(MODEL_PATH, 'wb') as file, tqdm(
+            desc="Downloading",
+            total=total,
+            unit='B',
+            unit_scale=True,
+            unit_divisor=1024,
+        ) as bar:
+            for data in response.iter_content(chunk_size=1024):
+                file.write(data)
+                bar.update(len(data))
+    else:
+        print("Model already downloaded.")
+
+
 # StreamHandler to intercept streaming output from the LLM.
 # This makes it appear that the Language Model is "typing"
 # in realtime.

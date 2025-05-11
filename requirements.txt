@@ -1,10 +1,10 @@
+streamlit
 requests
 tqdm
-beautifulsoup4==4.12.2
-docarray==0.39.1
-langchain==0.0.321
-llama_cpp_python==0.2.11
+beautifulsoup4
+PyMuPDF
+sentence-transformers
+langchain
+llama-cpp-python
+docarray
 pydantic==1.10.8
-PyMuPDF==1.23.5
-sentence-transformers==2.2.2
-streamlit==1.27.2

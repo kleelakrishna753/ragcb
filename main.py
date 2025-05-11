@@ -154,6 +154,8 @@ st.set_page_config(
 # Create a header element
 st.header("Your own AI-Chat!")
 
+download_model()
+
 # This sets the LLM's personality.
 # The initial personality privided is basic.
 # Try something interesting and notice how the LLM responses are affected.
